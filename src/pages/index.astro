@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { emailHref, site } from '../config/site';
+import { services } from '../data/services';
+import { projects } from '../data/projects';
+
+const schema = { '@context': 'https://schema.org', '@type': 'ProfessionalService', name: site.name, description: site.description, email: site.email, url: site.url, founder: { '@type': 'Person', name: site.owner } };
+---
+<BaseLayout>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="top" class="page-shell">
+    <Header />
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-heading">
+        <img src="/images/hero-bathroom.svg" alt="Placeholder for a bright, carefully designed Roomwright bathroom" width="1800" height="1200" fetchpriority="high" />
+        <div class="hero-overlay"></div>
+        <div class="hero-content eyebrow-light">
+          <p>Bathroom design & installation</p>
+          <h1 id="hero-heading">Beautiful bathrooms,<br />properly made.</h1>
+          <p class="hero-copy">Designed, built and finished by Harrison Herring. Roomwright takes a project from first idea through to the finished room.</p>
+          <div class="actions"><a class="button button-light" href={emailHref}>Discuss your bathroom</a><a class="text-link light" href="#projects">See previous work <span aria-hidden="true">↓</span></a></div>
+        </div>
+      </section>
+
+      <section class="intro section" aria-labelledby="intro-heading">
+        <div class="section-label">Roomwright approach</div>
+        <div><h2 id="intro-heading">One person.<br />The whole room.</h2></div>
+        <div class="intro-copy"><p>A successful bathroom involves far more than fitting a bath, basin or shower. Plumbing, electrics, walls, floors, lighting, storage and finishing all have to work together.</p><p>Harrison manages the complete transformation, helping turn an idea into a practical, carefully finished bathroom.</p></div>
+      </section>
+
+      <section id="services" class="services section" aria-labelledby="services-heading">
+        <div class="section-heading"><div><p class="section-label">What Roomwright does</p><h2 id="services-heading">Everything the room needs.</h2></div><p>Each part is considered as part of one complete job, not as a list of separate trades.</p></div>
+        <div class="service-grid">{services.map(([title, description], index) => <article class="service-card"><span>{String(index + 1).padStart(2, '0')}</span><h3>{title}</h3><p>{description}</p></article>)}</div>
+      </section>
+
+      <section class="process section tone" aria-labelledby="process-heading">
+        <div class="section-heading"><div><p class="section-label">A clear process</p><h2 id="process-heading">From idea to finished room.</h2></div></div>
+        <ol class="steps"><li><span>01</span><h3>Talk</h3><p>Discuss the existing room, ideas, priorities and budget.</p></li><li><span>02</span><h3>Design</h3><p>Develop a practical layout and agree fixtures, finishes and details.</p></li><li><span>03</span><h3>Build</h3><p>Remove the old bathroom and carry out preparation and installation.</p></li><li><span>04</span><h3>Finish</h3><p>Complete the tiling, fittings, details and final checks.</p></li></ol>
+      </section>
+
+      <section id="projects" class="projects section" aria-labelledby="projects-heading">
+        <div class="section-heading"><div><p class="section-label">A growing portfolio</p><h2 id="projects-heading">Previous work.</h2></div><p>These image placeholders are ready to be replaced with Roomwright projects.</p></div>
+        <div class="project-grid">{projects.map((project) => <article class="project-card"><button class="project-image" type="button" data-lightbox-src={project.images[0]} data-lightbox-alt={project.title} aria-label={`View ${project.title} larger`}><img src={project.images[0]} alt={`Placeholder for ${project.title}`} width="900" height="1125" loading="lazy" /></button><div><h3>{project.title}</h3>{project.description && <p>{project.description}</p>}</div></article>)}</div>
+      </section>
+
+      <section class="before-after section" aria-labelledby="before-after-heading"><div class="section-heading"><div><p class="section-label">The transformation</p><h2 id="before-after-heading">Before & after.</h2></div><p>One example layout for showing the change from an existing bathroom to the finished room.</p></div><div class="comparison"><figure><figcaption>Before</figcaption><img src="/images/before-placeholder.svg" alt="Placeholder for a bathroom before its Roomwright transformation" width="1200" height="900" loading="lazy" /></figure><figure><figcaption>After</figcaption><img src="/images/after-placeholder.svg" alt="Placeholder for a completed Roomwright bathroom" width="1200" height="900" loading="lazy" /></figure></div></section>
+
+      <section class="why section dark" aria-labelledby="why-heading"><div><p class="section-label">Why Roomwright</p><h2 id="why-heading">More than<br />bathroom fitting.</h2></div><div><p class="lead">A bathroom project brings several different trades and decisions together. Roomwright is about treating them as one job and one finished room.</p><ul><li>One point of contact</li><li>Design and installation considered together</li><li>Attention to the small details</li><li>Practical solutions for awkward spaces</li><li>A clean, coordinated finish</li></ul></div></section>
+
+      <section id="about" class="about section" aria-labelledby="about-heading"><div class="about-image"><img src="/images/harrison-herring.svg" alt="Placeholder portrait for Harrison Herring" width="1000" height="1250" loading="lazy" /></div><div class="about-copy"><p class="section-label">The person behind Roomwright</p><h2 id="about-heading">Harrison Herring</h2><p>Roomwright is Harrison Herring’s bathroom design and installation service. From planning the layout to completing the finishing touches, Harrison takes a hands-on approach to creating bathrooms that work properly and look right.</p><a class="text-link" href={emailHref}>Email Harrison <span aria-hidden="true">→</span></a></div></section>
+
+      <section id="contact" class="contact section tone" aria-labelledby="contact-heading"><div><p class="section-label">Start a conversation</p><h2 id="contact-heading">Thinking about<br />a new bathroom?</h2><p>Whether you already know exactly what you want or are starting with a room that simply isn’t working, get in touch and tell Harrison what you have in mind.</p><p class="contact-name">{site.owner}<br /><a href={emailHref}>{site.email}</a></p><a class="button" href={emailHref}>Email Harrison</a></div><form class="enquiry-form" aria-label="Future enquiry form"><p><strong>Enquiry form</strong><br />This form is ready to connect to a secure form endpoint when one is set up. For now, please email Harrison directly.</p><label>Name<input name="name" autocomplete="name" disabled /></label><label>Email<input name="email" type="email" autocomplete="email" disabled /></label><label>Telephone <small>optional</small><input name="telephone" type="tel" autocomplete="tel" disabled /></label><label>Postcode <small>optional</small><input name="postcode" autocomplete="postal-code" disabled /></label><label>Tell me about your bathroom<textarea name="message" rows="4" disabled></textarea></label><button type="button" disabled>Send enquiry</button></form></section>
+    </main>
+    <Footer />
+  </div>
+  <a class="mobile-email" href={emailHref}>Email Harrison</a>
+  <dialog class="lightbox" aria-label="Project image viewer"><button class="lightbox-close" aria-label="Close image viewer">×</button><img src="" alt="" /></dialog>
+  <script>
+    const dialog = document.querySelector<HTMLDialogElement>('.lightbox');
+    const image = dialog?.querySelector('img');
+    document.querySelectorAll<HTMLButtonElement>('[data-lightbox-src]').forEach((button) => button.addEventListener('click', () => { if (dialog && image) { image.src = button.dataset.lightboxSrc || ''; image.alt = button.dataset.lightboxAlt || ''; dialog.showModal(); } }));
+    dialog?.querySelector('.lightbox-close')?.addEventListener('click', () => dialog.close());
+    dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+  </script>
+</BaseLayout>

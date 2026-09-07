@@ -1,0 +1,10 @@
+---
+import { emailHref, site } from '../config/site';
+---
+<header class="site-header">
+  <a class="wordmark" href="#top" aria-label={`${site.name} home`}>Room<span>wright</span></a>
+  <nav aria-label="Primary navigation">
+    <a href="#services">Services</a><a href="#projects">Work</a><a href="#about">About</a>
+    <a class="nav-contact" href={emailHref}>Contact</a>
+  </nav>
+</header>
