@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Footer from '../../components/Footer.astro';
+import AdviceHeader from '../../components/AdviceHeader.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { guides } from '../../data/guides';
+---
+<BaseLayout title="Bathroom Advice & Guides | Roomwright" description="Straightforward advice from Roomwright on the practical decisions behind a well-designed, properly installed bathroom.">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <AdviceHeader />
+  <main id="main">
+    <section class="page-intro section" aria-labelledby="advice-heading"><p class="section-label">Roomwright advice</p><h1 id="advice-heading">Bathroom advice,<br />properly explained.</h1><p>Useful, plain-English notes on the details behind a carefully planned bathroom. Enough to make decisions clearer, without turning your project into a technical exercise.</p></section>
+    <section class="guides-list section tone" aria-label="Advice guides"><div class="guide-list">{guides.map((guide) => <GuideCard guide={guide} />)}</div></section>
+  </main>
+  <Footer />
+  <style>
+    .page-intro { max-width:70rem; padding-top:clamp(4.5rem,10vw,9rem); } .page-intro h1 { font-size:clamp(3rem,6vw,6rem); } .page-intro > p:last-child { max-width:39rem; font-size:1.12rem; } .guide-list { max-width:50rem; } 
+  </style>
+</BaseLayout>

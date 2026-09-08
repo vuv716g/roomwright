@@ -5,6 +5,8 @@ import Footer from '../components/Footer.astro';
 import { emailHref, site } from '../config/site';
 import { services } from '../data/services';
 import { projects } from '../data/projects';
+import { guides } from '../data/guides';
+import GuideCard from '../components/GuideCard.astro';
 
 const schema = { '@context': 'https://schema.org', '@type': 'ProfessionalService', name: site.name, description: site.description, email: site.email, url: site.url, founder: { '@type': 'Person', name: site.owner } };
 ---
@@ -41,6 +43,11 @@ const schema = { '@context': 'https://schema.org', '@type': 'ProfessionalService
         <ol class="steps"><li><span>01</span><h3>Talk</h3><p>Discuss the existing room, ideas, priorities and budget.</p></li><li><span>02</span><h3>Design</h3><p>Develop a practical layout and agree fixtures, finishes and details.</p></li><li><span>03</span><h3>Build</h3><p>Remove the old bathroom and carry out preparation and installation.</p></li><li><span>04</span><h3>Finish</h3><p>Complete the tiling, fittings, details and final checks.</p></li></ol>
       </section>
 
+      <section class="advice-preview section" aria-labelledby="advice-heading">
+        <div class="section-heading"><div><p class="section-label">Roomwright advice</p><h2 id="advice-heading">Helpful detail,<br />clearly explained.</h2></div><p>Practical notes on the choices behind a bathroom that works as well as it looks.</p></div>
+        <div class="guide-list">{guides.slice(0, 2).map((guide) => <GuideCard guide={guide} />)}</div>
+        <a class="text-link advice-all-link" href="/advice/">See all advice <span aria-hidden="true">→</span></a>
+      </section>
       <section id="projects" class="projects section" aria-labelledby="projects-heading">
         <div class="section-heading"><div><p class="section-label">A growing portfolio</p><h2 id="projects-heading">Previous work.</h2></div><p>These image placeholders are ready to be replaced with Roomwright projects.</p></div>
         <div class="project-grid">{projects.map((project) => <article class="project-card"><button class="project-image" type="button" data-lightbox-src={project.images[0]} data-lightbox-alt={project.title} aria-label={`View ${project.title} larger`}><img src={project.images[0]} alt={`Placeholder for ${project.title}`} width="900" height="1125" loading="lazy" /></button><div><h3>{project.title}</h3>{project.description && <p>{project.description}</p>}</div></article>)}</div>

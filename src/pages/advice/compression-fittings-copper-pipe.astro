@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Footer from '../../components/Footer.astro';
+import AdviceHeader from '../../components/AdviceHeader.astro';
+import { emailHref, site } from '../../config/site';
+import { guides } from '../../data/guides';
+
+const guide = guides[0];
+const title = `${guide.title} | ${site.name}`;
+const description = 'A simple guide to compression fittings for copper pipe, why bathroom installers use them, and when soldered, press-fit or push-fit alternatives may be more appropriate.';
+const schema = { '@context': 'https://schema.org', '@type': 'Article', headline: guide.title, description, datePublished: guide.published, dateModified: guide.published, mainEntityOfPage: `${site.url}/advice/${guide.slug}/`, author: { '@type': 'Person', name: site.owner }, publisher: { '@type': 'Organization', name: site.name, url: site.url } };
+---
+<BaseLayout {title} {description}>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+  <a class="skip-link" href="#main">Skip to content</a>
+  <AdviceHeader />
+  <main id="main">
+    <article>
+      <header class="article-header section"><p class="section-label">Bathroom plumbing advice</p><h1>Why Use Compression Fittings on Copper Pipe?</h1><p class="article-lead">A compression fitting is one of several sound ways to join copper pipe in a bathroom. It is not the answer everywhere, but it can be a very sensible choice in the right place.</p></header>
+      <div class="article-body section">
+        <p>Bathroom pipework needs to be reliable, tidy and considered alongside everything around it. Copper can be joined with soldered end-feed fittings, compression fittings, push-fit fittings or press-fit fittings. Each has its place. The best choice depends on access, appearance, the pipework already there and whether the connection may need attention later.</p>
+        <h2>How a compression fitting works</h2>
+        <p>A compression fitting makes a mechanical seal. It normally has three main parts: the fitting itself, a nut and a small ring called an olive. Once the pipe is properly seated and the nut is tightened, the olive compresses around the copper pipe to create the seal.</p>
+        <div class="fitting-diagram" aria-label="Compression fitting parts: copper pipe, nut, olive, compression fitting"><span>Copper pipe</span><i aria-hidden="true"></i><span>Nut</span><i aria-hidden="true"></i><span>Olive</span><i aria-hidden="true"></i><span>Fitting</span></div>
+        <h2>No heat or flame</h2>
+        <p>One clear advantage is that no blowtorch is needed. That can make a fitting particularly useful close to timber, inside cupboards, near insulation or existing decoration, and in awkward, confined spaces. Avoiding an open flame can make the work simpler and more appropriate for the location.</p>
+        <h2>Useful when altering existing pipework</h2>
+        <p>Compression fittings are often useful for isolation valves, taps, toilets, shower components and connections into existing copper pipework. They are also a practical way to connect copper pipe to suitable valves or appliances.</p>
+        <p>Unlike a soldered or pressed joint, a compression connection can often be dismantled later. That is helpful where future maintenance or a small alteration is a realistic possibility.</p>
+        <h2>When soldering is inconvenient</h2>
+        <p>Soldering copper pipe relies on the pipe and joint being properly prepared and sufficiently dry. In an existing bathroom, a little residual water in the pipework can make that more inconvenient. A compression fitting can be a practical alternative in a suitable, accessible location.</p>
+        <h2>Simple equipment, careful work</h2>
+        <p>Compression fittings generally need suitable spanners and properly prepared copper pipe. There is no blowtorch, solder, gas cylinder or powered press tool involved. That does not make them a shortcut: the pipe still needs to be cut squarely, deburred, fully seated and tightened correctly without over-tightening.</p>
+        <aside class="comparison-panel" aria-label="A short comparison of pipe jointing methods"><div><h3>Soldered</h3><p>Neat, inexpensive and permanent. Requires heat.</p></div><div><h3>Compression</h3><p>No heat and can often be dismantled. Bulkier than soldered fittings.</p></div><div><h3>Press-fit</h3><p>Fast, professional and flame-free. Requires specialist tooling.</p></div></aside>
+        <h2>Where compression fittings are not always ideal</h2>
+        <p>They are physically larger than soldered fittings, generally cost more than a simple end-feed fitting and may not look as neat on exposed pipework. Where practical, they are usually best kept accessible. They are not automatically the right fitting for every location.</p>
+        <p>A professional installer may use several jointing methods in one bathroom, choosing according to access, appearance, maintenance needs and the materials around the pipework. Good plumbing is not about using one fitting everywhere; it is about choosing the most appropriate connection for each part of the job.</p>
+      </div>
+      <section class="article-cta section tone" aria-labelledby="planning-heading"><p class="section-label">Roomwright</p><h2 id="planning-heading">Planning a bathroom?</h2><p>Roomwright can advise on the complete installation, so you do not need to make technical decisions about pipework and fittings in isolation.</p><a class="button" href={emailHref}>Discuss your bathroom</a></section>
+    </article>
+  </main>
+  <Footer />
+  <style>
+    .article-header { max-width:74rem; padding-top:clamp(4.5rem,10vw,9rem); } .article-header h1 { max-width:60rem; font-size:clamp(3rem,6vw,6.2rem); } .article-lead { max-width:44rem; font:400 clamp(1.2rem,2vw,1.65rem)/1.4 var(--serif); } .article-body { max-width:62rem; padding-top:0; } .article-body > * { max-width:43rem; } .article-body h2 { margin:3.5rem 0 1rem; font-size:clamp(2rem,3.5vw,3.4rem); } .article-body p { font-size:1.06rem; } .fitting-diagram { max-width:52rem; display:flex; align-items:center; gap:.65rem; flex-wrap:wrap; margin:2rem 0; padding:1.1rem 1.2rem; background:var(--sand); font:.75rem var(--mono); text-transform:uppercase; letter-spacing:.06em; } .fitting-diagram i { display:block; width:2rem; height:1px; background:var(--clay); } .comparison-panel { max-width:52rem; display:grid; grid-template-columns:repeat(3,1fr); margin:3rem 0; border-top:1px solid var(--line); border-left:1px solid var(--line); } .comparison-panel div { padding:1.2rem; border-right:1px solid var(--line); border-bottom:1px solid var(--line); } .comparison-panel h3 { margin:0 0:.5rem; font:500 1.25rem var(--serif); } .comparison-panel p { margin:0; font-size:.86rem; } .article-cta { margin-top:2rem; } .article-cta > * { max-width:42rem; } .article-cta h2 { font-size:clamp(2.7rem,5vw,5rem); } .article-cta .button { margin-top:1rem; } @media (max-width:600px) { .comparison-panel { grid-template-columns:1fr; } .fitting-diagram { align-items:flex-start; flex-direction:column; } .fitting-diagram i { width:1px; height:1.3rem; margin-left:.5rem; } }
+  </style>
+</BaseLayout>
