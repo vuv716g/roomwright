@@ -7,7 +7,7 @@ import { guides } from '../../data/guides';
 
 const guide = guides[0];
 const title = `${guide.title} | ${site.name}`;
-const description = 'A simple guide to compression fittings for copper pipe, why bathroom installers use them, and when soldered, press-fit or push-fit alternatives may be more appropriate.';
+const description = 'A simple guide to compression fittings for copper pipe, why installers use them, and when soldered, press-fit or push-fit alternatives may be more appropriate.';
 const schema = { '@context': 'https://schema.org', '@type': 'Article', headline: guide.title, description, datePublished: guide.published, dateModified: guide.published, mainEntityOfPage: `${site.url}/advice/${guide.slug}/`, author: { '@type': 'Person', name: site.owner }, publisher: { '@type': 'Organization', name: site.name, url: site.url } };
 ---
 <BaseLayout {title} {description}>
@@ -16,9 +16,9 @@ const schema = { '@context': 'https://schema.org', '@type': 'Article', headline:
   <AdviceHeader />
   <main id="main">
     <article>
-      <header class="article-header section"><p class="section-label">Bathroom plumbing advice</p><h1>Why Use Compression Fittings on Copper Pipe?</h1><p class="article-lead">A compression fitting is one of several sound ways to join copper pipe in a bathroom. It is not the answer everywhere, but it can be a very sensible choice in the right place.</p></header>
+      <header class="article-header section"><p class="section-label">Room plumbing advice</p><h1>Why Use Compression Fittings on Copper Pipe?</h1><p class="article-lead">A compression fitting is one of several sound ways to join copper pipe in a room. It is not the answer everywhere, but it can be a very sensible choice in the right place.</p></header>
       <div class="article-body section">
-        <p>Bathroom pipework needs to be reliable, tidy and considered alongside everything around it. Copper can be joined with soldered end-feed fittings, compression fittings, push-fit fittings or press-fit fittings. Each has its place. The best choice depends on access, appearance, the pipework already there and whether the connection may need attention later.</p>
+        <p>Room pipework needs to be reliable, tidy and considered alongside everything around it. Copper can be joined with soldered end-feed fittings, compression fittings, push-fit fittings or press-fit fittings. Each has its place. The best choice depends on access, appearance, the pipework already there and whether the connection may need attention later.</p>
         <h2>How a compression fitting works</h2>
         <p>A compression fitting makes a mechanical seal. It normally has three main parts: the fitting itself, a nut and a small ring called an olive. Once the pipe is properly seated and the nut is tightened, the olive compresses around the copper pipe to create the seal.</p>
         <div class="fitting-diagram" aria-label="Compression fitting parts: copper pipe, nut, olive, compression fitting"><span>Copper pipe</span><i aria-hidden="true"></i><span>Nut</span><i aria-hidden="true"></i><span>Olive</span><i aria-hidden="true"></i><span>Fitting</span></div>
@@ -28,15 +28,15 @@ const schema = { '@context': 'https://schema.org', '@type': 'Article', headline:
         <p>Compression fittings are often useful for isolation valves, taps, toilets, shower components and connections into existing copper pipework. They are also a practical way to connect copper pipe to suitable valves or appliances.</p>
         <p>Unlike a soldered or pressed joint, a compression connection can often be dismantled later. That is helpful where future maintenance or a small alteration is a realistic possibility.</p>
         <h2>When soldering is inconvenient</h2>
-        <p>Soldering copper pipe relies on the pipe and joint being properly prepared and sufficiently dry. In an existing bathroom, a little residual water in the pipework can make that more inconvenient. A compression fitting can be a practical alternative in a suitable, accessible location.</p>
+        <p>Soldering copper pipe relies on the pipe and joint being properly prepared and sufficiently dry. In an existing room, a little residual water in the pipework can make that more inconvenient. A compression fitting can be a practical alternative in a suitable, accessible location.</p>
         <h2>Simple equipment, careful work</h2>
         <p>Compression fittings generally need suitable spanners and properly prepared copper pipe. There is no blowtorch, solder, gas cylinder or powered press tool involved. That does not make them a shortcut: the pipe still needs to be cut squarely, deburred, fully seated and tightened correctly without over-tightening.</p>
         <aside class="comparison-panel" aria-label="A short comparison of pipe jointing methods"><div><h3>Soldered</h3><p>Neat, inexpensive and permanent. Requires heat.</p></div><div><h3>Compression</h3><p>No heat and can often be dismantled. Bulkier than soldered fittings.</p></div><div><h3>Press-fit</h3><p>Fast, professional and flame-free. Requires specialist tooling.</p></div></aside>
         <h2>Where compression fittings are not always ideal</h2>
         <p>They are physically larger than soldered fittings, generally cost more than a simple end-feed fitting and may not look as neat on exposed pipework. Where practical, they are usually best kept accessible. They are not automatically the right fitting for every location.</p>
-        <p>A professional installer may use several jointing methods in one bathroom, choosing according to access, appearance, maintenance needs and the materials around the pipework. Good plumbing is not about using one fitting everywhere; it is about choosing the most appropriate connection for each part of the job.</p>
+        <p>A professional installer may use several jointing methods in one room, choosing according to access, appearance, maintenance needs and the materials around the pipework. Good plumbing is not about using one fitting everywhere; it is about choosing the most appropriate connection for each part of the job.</p>
       </div>
-      <section class="article-cta section tone" aria-labelledby="planning-heading"><p class="section-label">Roomwright</p><h2 id="planning-heading">Planning a bathroom?</h2><p>Roomwright can advise on the complete installation, so you do not need to make technical decisions about pipework and fittings in isolation.</p><a class="button" href={emailHref}>Discuss your bathroom</a></section>
+      <section class="article-cta section tone" aria-labelledby="planning-heading"><p class="section-label">Roomwright</p><h2 id="planning-heading">Planning a room?</h2><p>Roomwright can advise on the complete installation, so you do not need to make technical decisions about pipework and fittings in isolation.</p><a class="button" href={emailHref}>Discuss your room</a></section>
     </article>
   </main>
   <Footer />

@@ -8,11 +8,13 @@ export type Project = {
   afterImages?: string[];
 };
 
+const kingshillRougemont = '/images/kingshill-rougemont/';
+
 export const projects: Project[] = [
-  { title: 'Contemporary family bathroom', slug: 'contemporary-family-bathroom', description: 'A calm, practical room for daily life.', images: ['/images/projects/project-01.svg'] },
-  { title: 'Walk-in shower', slug: 'walk-in-shower', description: 'Open, simple and considered.', images: ['/images/projects/project-02.svg'] },
-  { title: 'Compact bathroom redesign', slug: 'compact-bathroom-redesign', description: 'Making a smaller room work harder.', images: ['/images/projects/project-03.svg'] },
-  { title: 'Traditional bathroom', slug: 'traditional-bathroom', description: 'Classic proportions, carefully finished.', images: ['/images/projects/project-04.svg'] },
-  { title: 'Ensuite transformation', slug: 'ensuite-transformation', description: 'A compact ensuite, made complete.', images: ['/images/projects/project-05.svg'] },
-  { title: 'Tiled shower room', slug: 'tiled-shower-room', description: 'A clean, waterproofed shower space.', images: ['/images/projects/project-06.svg'] },
+  { title: 'Calm, considered ensuite', slug: 'calm-considered-ensuite', description: 'Soft neutrals, clean lines and carefully planned lighting.', images: [`${kingshillRougemont}PXL_20251213_144220990.jpg`] },
+  { title: 'Walk-in shower', slug: 'walk-in-shower', description: 'A simple, open shower space with recessed storage.', images: [`${kingshillRougemont}PXL_20251213_142830820.jpg`] },
+  { title: 'Integrated basin storage', slug: 'integrated-basin-storage', description: 'Wall-mounted storage and a quietly detailed basin area.', images: [`${kingshillRougemont}PXL_20251213_142741328.jpg`] },
+  { title: 'Bathing space', slug: 'bathing-space', description: 'A compact bath area, finished in warm neutral tones.', images: [`${kingshillRougemont}PXL_20251213_143507687.jpg`] },
+  { title: 'Cloakroom detail', slug: 'cloakroom-detail', description: 'Essential fixtures set into a clean, practical layout.', images: [`${kingshillRougemont}PXL_20251213_143018023.jpg`] },
+  { title: 'Finishing details', slug: 'finishing-details', description: 'Tiling, lighting and fittings brought together with care.', images: [`${kingshillRougemont}PXL_20251213_143911896.jpg`] },
 ];

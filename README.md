@@ -1,6 +1,6 @@
 # Roomwright
 
-A fast, single-page Astro website for Roomwright, Harrison Herring’s bathroom design and installation service. Content is intentionally modest: it describes the complete-room approach without invented credentials, reviews or business facts.
+A fast, single-page Astro website for Roomwright, Harrison Herring’s room design and installation service. Content is intentionally modest: it describes the complete-room approach without invented credentials, reviews or business facts.
 
 ## Run locally
 
@@ -19,15 +19,11 @@ The completed static site is written to `dist/`.
 
 ## Photography
 
-All starter images are local SVG placeholders so the site works without external image services. Replace them with real, web-optimised photographs:
+The current homepage uses the Kingshill/Rougemont project photographs in `public/images/kingshill-rougemont/`. They are supplied high-resolution JPEGs and provide a useful first portfolio while more photography is gathered.
 
-- Hero: replace `public/images/hero-bathroom.svg` with `public/images/hero-bathroom.jpg`, then update its reference in `src/pages/index.astro`.
-- Portrait: replace `public/images/harrison-herring.svg` with `public/images/harrison-herring.jpg`, then update its reference in `src/pages/index.astro`.
-- Projects: add images in `public/images/projects/` (for example `project-01.jpg`) and update `src/data/projects.ts`. Each project has an `images` array for multiple photographs later, plus optional `beforeImages` and `afterImages`.
-- Before/after: replace `public/images/before-placeholder.svg` and `public/images/after-placeholder.svg` with appropriately named real files and update `src/pages/index.astro`.
-
-Use landscape images for before/after, portrait or near-portrait images for project cards, and supply meaningful alt text once real photographs are added. Aim for compressed WebP or JPEG files; keep dimensions generous enough for the largest display size.
-
+- Hero, project cards and project-details panels are referenced from `src/pages/index.astro` and `src/data/projects.ts`.
+- Use meaningful alt text that describes the completed room or visible detail when replacing them.
+- For future images, use compressed WebP or JPEG files and retain generous source dimensions for the largest display size.
 ## Maintenance
 
 - Business details and SEO defaults live in `src/config/site.ts`.

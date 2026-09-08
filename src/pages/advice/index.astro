@@ -5,11 +5,11 @@ import AdviceHeader from '../../components/AdviceHeader.astro';
 import GuideCard from '../../components/GuideCard.astro';
 import { guides } from '../../data/guides';
 ---
-<BaseLayout title="Bathroom Advice & Guides | Roomwright" description="Straightforward advice from Roomwright on the practical decisions behind a well-designed, properly installed bathroom.">
+<BaseLayout title="Room Advice & Guides | Roomwright" description="Straightforward advice from Roomwright on the practical decisions behind a well-designed, properly installed room.">
   <a class="skip-link" href="#main">Skip to content</a>
   <AdviceHeader />
   <main id="main">
-    <section class="page-intro section" aria-labelledby="advice-heading"><p class="section-label">Roomwright advice</p><h1 id="advice-heading">Bathroom advice,<br />properly explained.</h1><p>Useful, plain-English notes on the details behind a carefully planned bathroom. Enough to make decisions clearer, without turning your project into a technical exercise.</p></section>
+    <section class="page-intro section" aria-labelledby="advice-heading"><p class="section-label">Roomwright advice</p><h1 id="advice-heading">Room advice,<br />properly explained.</h1><p>Useful, plain-English notes on the details behind a carefully planned room. Enough to make decisions clearer, without turning your project into a technical exercise.</p></section>
     <section class="guides-list section tone" aria-label="Advice guides"><div class="guide-list">{guides.map((guide) => <GuideCard guide={guide} />)}</div></section>
   </main>
   <Footer />
