@@ -17,7 +17,7 @@ const schema = { '@context': 'https://schema.org', '@type': 'ProfessionalService
     <Header />
     <main id="main">
       <section class="hero" aria-labelledby="hero-heading">
-        <img src="/images/kingshill-rougemont/PXL_20251213_144220990.jpg" alt="A completed Roomwright ensuite with warm neutral tiling, a walk-in shower and integrated storage" width="1800" height="1200" fetchpriority="high" />
+        <img src="/images/hero-roomwright-feature.png" alt="A finished Roomwright interior with oak acoustic wall panelling, a dark feature wall and warm recessed lighting" width="1208" height="820" fetchpriority="high" />
         <div class="hero-overlay"></div>
         <div class="hero-content eyebrow-light">
           <p>Room design & installation</p>
@@ -50,7 +50,7 @@ const schema = { '@context': 'https://schema.org', '@type': 'ProfessionalService
       </section>
       <section id="projects" class="projects section" aria-labelledby="projects-heading">
         <div class="section-heading"><div><p class="section-label">A growing portfolio</p><h2 id="projects-heading">Previous work.</h2></div><p>A selection of finished details from a recent Roomwright installation.</p></div>
-        <div class="project-grid">{projects.map((project) => <article class="project-card"><button class="project-image" type="button" data-lightbox-src={project.images[0]} data-lightbox-alt={project.title} aria-label={`View ${project.title} larger`}><img src={project.images[0]} alt={project.title} width="900" height="1125" loading="lazy" /></button><div><h3>{project.title}</h3>{project.description && <p>{project.description}</p>}</div></article>)}</div>
+        <div class="project-grid">{projects.map((project) => <article class="project-card"><button class="project-image" type="button" data-lightbox-src={project.images[0]} data-lightbox-alt={project.title} aria-label={`View ${project.title} larger`}><img src={project.images[0]} alt={project.title} width="900" height="1125" loading="lazy" /></button>{project.images.length > 1 && <div class="project-thumbnails" aria-label={`${project.title} gallery`}>{project.images.slice(1).map((image, index) => <button type="button" data-lightbox-src={image} data-lightbox-alt={`${project.title} — installation stage ${index + 1}`} aria-label={`View ${project.title} installation stage ${index + 1} larger`}><img src={image} alt={`${project.title} installation stage ${index + 1}`} width="900" height="675" loading="lazy" /></button>)}</div>}<div><h3>{project.title}</h3>{project.description && <p>{project.description}</p>}</div></article>)}</div>
       </section>
 
       <section class="project-details section" aria-labelledby="project-details-heading"><div class="section-heading"><div><p class="section-label">Project details</p><h2 id="project-details-heading">Made to work<br />as one room.</h2></div><p>Storage, lighting, tiling and fittings brought together in a compact ensuite installation.</p></div><div class="comparison"><figure><figcaption>Shower detail</figcaption><img src="/images/kingshill-rougemont/PXL_20251213_142948914.jpg" alt="Walk-in shower with a recessed storage niche" width="6144" height="8160" loading="lazy" /></figure><figure><figcaption>Basin detail</figcaption><img src="/images/kingshill-rougemont/PXL_20251213_143733288.jpg" alt="Wall-mounted basin below an illuminated mirrored cabinet" width="5358" height="6922" loading="lazy" /></figure></div></section>

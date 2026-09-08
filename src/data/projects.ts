@@ -17,4 +17,7 @@ export const projects: Project[] = [
   { title: 'Bathing space', slug: 'bathing-space', description: 'A compact bath area, finished in warm neutral tones.', images: [`${kingshillRougemont}PXL_20251213_143507687.jpg`] },
   { title: 'Cloakroom detail', slug: 'cloakroom-detail', description: 'Essential fixtures set into a clean, practical layout.', images: [`${kingshillRougemont}PXL_20251213_143018023.jpg`] },
   { title: 'Finishing details', slug: 'finishing-details', description: 'Tiling, lighting and fittings brought together with care.', images: [`${kingshillRougemont}PXL_20251213_143911896.jpg`] },
+  { title: 'Fitted wardrobe storage', slug: 'fitted-wardrobe-storage', description: 'A made-to-measure wardrobe installation with hanging space, shelving and drawer storage.', images: ['/images/fitted-wardrobe-installation.png'] },
+  { title: 'Bespoke outbuilding bar', slug: 'bespoke-outbuilding-bar', description: 'A made-to-measure outbuilding bar with curved slatted panelling, integrated lighting and air conditioning installed by Harrison.', images: ['/images/bespoke-outbuilding-bar-finished.png', '/images/bespoke-outbuilding-bar-in-progress.png'] },
+  { title: 'Outbuilding deck & lighting', slug: 'outbuilding-deck-lighting', description: 'A finished outbuilding exterior with timber decking, exterior lighting and carefully detailed joinery.', images: ['/images/outbuilding-decking-exterior-lighting.png', '/images/outbuilding-decking-construction-wide.png', '/images/outbuilding-decking-construction-detail.png'] },
 ];
