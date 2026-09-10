@@ -1,0 +1,8 @@
+# Copy this file to .dev.vars for local Pages development. Do not commit .dev.vars.
+# The Turnstile test pair is local-only; set live values in Cloudflare Pages for production.
+RESEND_API_KEY="re_replace_with_your_resend_key"
+ENQUIRY_TO="replace_with_the_enquiry_inbox"
+EMAIL_FROM="Roomwright website <enquiries@your-verified-domain>"
+TURNSTILE_SITEKEY="1x00000000000000000000AA"
+TURNSTILE_SECRET="1x0000000000000000000000000000000AA"
+TURNSTILE_HOSTNAMES="localhost,127.0.0.1,0.0.0.0"

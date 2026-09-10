@@ -9,3 +9,26 @@
 
 .advice-preview { background:#fff; } .guide-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); max-width:68rem; border-top:1px solid var(--line); border-left:1px solid var(--line); } .guide-card { padding:1.5rem; min-height:17rem; border-right:1px solid var(--line); border-bottom:1px solid var(--line); } .guide-card h3 { margin:2.5rem 0 .7rem; font:500 clamp(1.5rem,2.3vw,2rem)/1.08 var(--serif); letter-spacing:-.04em; } .guide-card h3 a { text-decoration:none; } .guide-card h3 a:hover { text-decoration:underline; text-underline-offset:.2em; } .guide-card > p:not(.section-label) { max-width:30rem; margin:0; color:var(--muted); font-size:.92rem; } .guide-card .text-link { margin-top:1.5rem; } .advice-all-link { margin-top:2rem; } @media (max-width:800px) { .guide-list { grid-template-columns:repeat(2,1fr); } } @media (max-width:420px) { .guide-list { grid-template-columns:1fr; } } .project-thumbnails { display:grid; grid-template-columns:repeat(2,1fr); gap:.5rem; margin-top:.5rem; } .project-thumbnails button { appearance:none; border:0; padding:0; overflow:hidden; background:var(--sand); cursor:zoom-in; } .project-thumbnails img { aspect-ratio:4/3; object-fit:cover; transition:transform .5s ease; } .project-thumbnails button:hover img { transform:scale(1.04); }
 .featured-project-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(1rem,2vw,2rem); } .featured-project { padding-bottom:1.5rem; border-bottom:1px solid var(--line); } .featured-project .project-image img { aspect-ratio:4/3; } .project-kicker { margin:1.15rem 0 -.45rem!important; color:var(--clay)!important; font:.7rem var(--mono)!important; letter-spacing:.1em; text-transform:uppercase; } .portfolio-divider { display:grid; grid-template-columns:1fr 1.4fr 1fr; gap:2rem; align-items:end; padding:clamp(4.5rem,9vw,8rem) 0 2.5rem; } .portfolio-divider h3 { margin:.55rem 0 0; font:500 clamp(2.4rem,4.5vw,4.8rem)/.98 var(--serif); letter-spacing:-.06em; } .portfolio-divider > p:last-child { margin:0; max-width:22rem; color:var(--muted); } @media (max-width:800px) { .featured-project-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .portfolio-divider { grid-template-columns:1fr; gap:1rem; padding-top:4.5rem; } } @media (max-width:420px) { .featured-project-grid { grid-template-columns:1fr; } }
+
+/* Shared site chrome: one dark family, with a deeper closing footer. */
+:root { --chrome:#26342d; --footer:#17231e; }
+.site-header { background:rgba(38,52,45,.97); border-bottom-color:rgba(248,246,241,.18); color:var(--paper); }
+.site-header .wordmark img, footer .wordmark img { filter:brightness(0) invert(1); }
+footer { grid-template-columns:1fr 1fr auto; align-items:end; background:var(--footer); border-top-color:rgba(248,246,241,.15); color:var(--paper); }
+footer a { text-underline-offset:.22em; }
+.footer-contact > p { margin-top:0; color:#bbc4bc; font:.7rem var(--mono); letter-spacing:.1em; text-transform:uppercase; }
+.footer-contact > a { display:inline-block; font:500 1.1rem var(--serif); }
+.footer-meta { text-align:right; }
+.footer-meta p { color:#bbc4bc; }
+@media (max-width:800px) { .footer-meta { text-align:left; } }
+/* A real enquiry form replaces the former disabled email prompt. */
+.honeypot { position:absolute; left:-10000px; }
+.enquiry-form .verification-field { min-height:65px; margin:1.15rem 0; }
+.enquiry-form button:not(:disabled) { background:var(--ink); color:#fff; cursor:pointer; }
+.enquiry-form button:not(:disabled):hover { background:transparent; color:var(--ink); border:1px solid var(--ink); }
+.enquiry-form button:disabled { opacity:.62; cursor:not-allowed; }
+.form-status { min-height:1.5em; margin-top:1rem; font-size:.9rem; }
+.form-status.success { border-top:1px solid var(--line); padding-top:1rem; }
+.advice-coming-soon { max-width:42rem; padding:clamp(2rem,4vw,3.5rem); border:1px solid var(--line); background:var(--paper); }
+.advice-coming-soon > p:last-child { max-width:34rem; margin-bottom:0; font-size:1.08rem; }
+.advice-coming-soon h2 { font-size:clamp(2.3rem,4vw,4rem); }

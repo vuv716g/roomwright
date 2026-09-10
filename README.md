@@ -1,6 +1,6 @@
 # Roomwright
 
-A fast, single-page Astro website for Roomwright, Harrison Herring’s room design and installation service. Content is intentionally modest: it describes the complete-room approach without invented credentials, reviews or business facts.
+A fast, single-page Astro website for Roomwright, Harrisonâ€™s room design and installation service. Content is intentionally modest: it describes the complete-room approach without invented credentials, reviews or business facts.
 
 ## Run locally
 

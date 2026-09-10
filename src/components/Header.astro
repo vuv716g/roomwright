@@ -1,12 +1,12 @@
 ---
-import { emailHref, site } from '../config/site';
+import { site } from '../config/site';
 ---
 <header class="site-header">
   <a class="wordmark" href="/" aria-label={`${site.name} home`}>
     <img src="/images/logo.png" alt="" width="1254" height="1254" />
   </a>
   <nav aria-label="Primary navigation">
-    <a href="/#services">Services</a><a href="/#projects">Work</a><a href="/#about">About</a><a href="/advice/">Advice</a>
-    <a class="nav-contact" href={emailHref}>Contact</a>
+    <a href="/#services">Services</a><a href="/#projects">Work</a><a href="/#about">About</a><a href="/#advice">Advice</a>
+    <a class="nav-contact" href="/#contact">Contact</a>
   </nav>
 </header>

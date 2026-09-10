@@ -1,8 +1,8 @@
 ---
-import { emailHref, site } from '../config/site';
+import { site } from '../config/site';
 ---
 <footer>
-  <div><a class="wordmark" href="/" aria-label={`${site.name} home`}><img src="/images/logo.png" alt="" width="1254" height="1254" /></a></div>
-  <div><a href={emailHref}>{site.email}</a><p>© {new Date().getFullYear()} {site.name}.</p></div>
-  <nav aria-label="Footer navigation"><a href="/">Home</a><a href="/#services">Services</a><a href="/#projects">Previous work</a><a href="/#about">About</a><a href="/advice/">Advice</a><a href="/#contact">Contact</a></nav>
+  <div class="footer-brand"><a class="wordmark" href="/#top" aria-label="Roomwright home"><img src="/images/logo.png" alt="" width="1254" height="1254" /></a></div>
+  <div class="footer-contact"><p>Start a conversation</p><a href="/#contact">Send a message</a></div>
+  <div class="footer-meta"><a href="/#top">Back to top &uarr;</a><p>&copy; {new Date().getFullYear()} {site.name}.</p></div>
 </footer>
