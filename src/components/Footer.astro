@@ -2,7 +2,7 @@
 import { emailHref, site } from '../config/site';
 ---
 <footer>
-  <div><a class="wordmark" href="/" aria-label={`${site.name} home`}><img src="/images/logo.png" alt="" width="1254" height="1254" /></a><p>{site.owner}</p></div>
+  <div><a class="wordmark" href="/" aria-label={`${site.name} home`}><img src="/images/logo.png" alt="" width="1254" height="1254" /></a></div>
   <div><a href={emailHref}>{site.email}</a><p>© {new Date().getFullYear()} {site.name}.</p></div>
   <nav aria-label="Footer navigation"><a href="/">Home</a><a href="/#services">Services</a><a href="/#projects">Previous work</a><a href="/#about">About</a><a href="/advice/">Advice</a><a href="/#contact">Contact</a></nav>
 </footer>
