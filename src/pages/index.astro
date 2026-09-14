@@ -41,6 +41,13 @@ const schema = { '@context': 'https://schema.org', '@type': 'ProfessionalService
       <section id="services" class="services section" aria-labelledby="services-heading">
         <div class="section-heading"><div><p class="section-label">What Roomwright does</p><h2 id="services-heading">Everything the room needs.</h2></div><p>Each part is considered as part of one complete job, not as a list of separate trades.</p></div>
         <div class="service-grid">{services.map(([title, description], index) => <article class="service-card"><span>{String(index + 1).padStart(2, '0')}</span><h3>{title}</h3><p>{description}</p></article>)}</div>
+        <aside class="retailer-installation" aria-labelledby="retailer-installation-heading">
+          <div>
+            <p class="section-label">Bought it elsewhere?</p>
+            <h3 id="retailer-installation-heading">Installation available for furniture purchased from Amazon and other major retailers.</h3>
+          </div>
+          <p class="retailer-disclaimer">Roomwright is an independent installation service and is not affiliated with or endorsed by Amazon.</p>
+        </aside>
       </section>
 
       <section class="process section tone" aria-labelledby="process-heading">
