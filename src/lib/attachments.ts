@@ -1,6 +1,6 @@
 export const MAX_TOTAL_ATTACHMENT_BYTES = 10 * 1024 * 1024;
 export const ATTACHMENT_ACCEPT = '.jpg,.jpeg,.png,.webp,.pdf';
-export const ATTACHMENT_HELP = 'Add up to 3 photos or plans (JPG, PNG, WebP or PDF). Maximum 5 MB per file and 10 MB in total. They will be emailed with your message.';
+export const ATTACHMENT_HELP = 'Choose files one at a time or together to add up to 3 photos or plans (JPG, PNG, WebP or PDF). Maximum 5 MB per file and 10 MB in total. They will be emailed with your message.';
 
 export function attachmentError(files: readonly { name: string; size: number }[]): string | null {
   if (files.length > 3) return 'Please choose no more than 3 attachments.';

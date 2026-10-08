@@ -68,7 +68,7 @@ const schema = { '@context': 'https://schema.org', '@type': 'ProfessionalService
 
 
 
-      <section id="contact" class="contact section tone" aria-labelledby="contact-heading"><div><p class="section-label">Start a conversation</p><h2 id="contact-heading">Thinking about<br />a new room?</h2><p>Whether you already know exactly what you want or are starting with a room that simply isn't working, send a message and tell Harrison what you have in mind.</p></div><form class="enquiry-form" action="/api/enquiry" method="post" enctype="multipart/form-data" data-enquiry-form><div class="honeypot" aria-hidden="true"><label>Leave this empty <input name="website" tabindex="-1" autocomplete="off" /></label></div><label>Name<input name="name" autocomplete="name" required /></label><label>Email<input name="email" type="email" autocomplete="email" required /></label><label>Telephone <small>optional</small><input name="telephone" type="tel" autocomplete="tel" /></label><label>Postcode <small>optional</small><input name="postcode" autocomplete="postal-code" /></label><label>Tell Harrison about your room<textarea name="message" rows="5" required placeholder="A little about the room, what you would like to change, and anything else that may help."></textarea></label><label for="attachments">Attach photos or plans <small>optional</small></label><p id="attachment-help">{ATTACHMENT_HELP}</p><input id="attachments" name="attachments" type="file" accept={ATTACHMENT_ACCEPT} multiple aria-describedby="attachment-help attachment-status" /><p id="attachment-status" aria-live="polite"></p><button type="button" class="clear-attachments" hidden>Clear attachments</button><div class="verification-field" data-turnstile-widget></div><button type="submit">Send message <span aria-hidden="true">&rarr;</span></button><div class="form-status" aria-live="polite"></div></form></section>    </main>
+      <section id="contact" class="contact section tone" aria-labelledby="contact-heading"><div><p class="section-label">Start a conversation</p><h2 id="contact-heading">Thinking about<br />a new room?</h2><p>Whether you already know exactly what you want or are starting with a room that simply isn't working, send a message and tell Harrison what you have in mind.</p></div><form class="enquiry-form" action="/api/enquiry" method="post" enctype="multipart/form-data" data-enquiry-form><div class="honeypot" aria-hidden="true"><label>Leave this empty <input name="website" tabindex="-1" autocomplete="off" /></label></div><label>Name<input name="name" autocomplete="name" required /></label><label>Email<input name="email" type="email" autocomplete="email" required /></label><label>Telephone <small>optional</small><input name="telephone" type="tel" autocomplete="tel" /></label><label>Postcode <small>optional</small><input name="postcode" autocomplete="postal-code" /></label><label>Tell Harrison about your room<textarea name="message" rows="5" required placeholder="A little about the room, what you would like to change, and anything else that may help."></textarea></label><label for="attachments">Attach photos or plans <small>optional</small></label><p id="attachment-help">{ATTACHMENT_HELP}</p><input id="attachments" name="attachments" type="file" accept={ATTACHMENT_ACCEPT} multiple aria-describedby="attachment-help attachment-status" /><p id="attachment-status" aria-live="polite"></p><ul id="attachment-list" aria-label="Selected attachments"></ul><button type="button" class="clear-attachments" hidden>Clear attachments</button><div class="verification-field" data-turnstile-widget></div><button type="submit">Send message <span aria-hidden="true">&rarr;</span></button><div class="form-status" aria-live="polite"></div></form></section>    </main>
     <Footer />
   </div>
   <a class="mobile-email" href="#contact">Send a message</a>
@@ -93,15 +93,42 @@ const schema = { '@context': 'https://schema.org', '@type': 'ProfessionalService
     const attachmentInput = enquiryForm?.querySelector<HTMLInputElement>('#attachments');
     const attachmentStatus = enquiryForm?.querySelector<HTMLElement>('#attachment-status');
     const clearAttachments = enquiryForm?.querySelector<HTMLButtonElement>('.clear-attachments');
-    const updateAttachments = () => {
-      const files = Array.from(attachmentInput?.files || []);
-      const error = attachmentError(files);
-      attachmentInput?.setCustomValidity(error || '');
-      if (attachmentStatus) attachmentStatus.textContent = error || files.map((file) => file.name).join(', ');
-      if (clearAttachments) clearAttachments.hidden = files.length === 0;
+    const attachmentList = enquiryForm?.querySelector<HTMLUListElement>('#attachment-list');
+    let selectedAttachments: File[] = [];
+    const updateAttachments = (error = '') => {
+      if (attachmentStatus) attachmentStatus.textContent = error || (selectedAttachments.length ? `${selectedAttachments.length} of 3 attachments added. Choose more files to add to this list.` : 'No attachments added.');
+      if (clearAttachments) clearAttachments.hidden = selectedAttachments.length === 0;
+      attachmentList?.replaceChildren();
+      selectedAttachments.forEach((file, index) => {
+        const item = document.createElement('li');
+        const name = document.createElement('span');
+        name.textContent = file.name;
+        const remove = document.createElement('button');
+        remove.type = 'button';
+        remove.textContent = 'Remove';
+        remove.setAttribute('aria-label', `Remove ${file.name}`);
+        remove.addEventListener('click', () => {
+          selectedAttachments.splice(index, 1);
+          updateAttachments();
+        });
+        item.append(name, remove);
+        attachmentList?.append(item);
+      });
     };
-    attachmentInput?.addEventListener('change', updateAttachments);
+    attachmentInput?.addEventListener('change', () => {
+      const added = Array.from(attachmentInput.files || []);
+      if (!added.length) return;
+      const combined = [...selectedAttachments];
+      for (const file of added) {
+        if (!combined.some((existing) => existing.name === file.name && existing.size === file.size && existing.lastModified === file.lastModified)) combined.push(file);
+      }
+      const error = attachmentError(combined);
+      if (!error) selectedAttachments = combined;
+      attachmentInput.value = '';
+      updateAttachments(error ? `${error} Your previous attachments are still selected.` : '');
+    });
     clearAttachments?.addEventListener('click', () => {
+      selectedAttachments = [];
       if (attachmentInput) attachmentInput.value = '';
       updateAttachments();
     });
@@ -158,13 +185,16 @@ const schema = { '@context': 'https://schema.org', '@type': 'ProfessionalService
       }
       const formData = new FormData(enquiryForm);
       formData.set('cf-turnstile-response', token);
+      formData.delete('attachments');
+      for (const file of selectedAttachments) formData.append('attachments', file);
       if (submitButton) submitButton.disabled = true;
-      setFormStatus(attachmentInput?.files?.length ? 'Sending your message and attachments. This may take a moment...' : 'Sending your message...');
+      setFormStatus(selectedAttachments.length ? 'Sending your message and attachments. This may take a moment...' : 'Sending your message...');
       try {
         const response = await fetch(enquiryForm.action, { method: 'POST', body: formData, headers: { Accept: 'application/json' } });
         const result = await response.json() as { error?: string };
         if (!response.ok) throw new Error(result.error || 'We could not send your message.');
         enquiryForm.reset();
+        selectedAttachments = [];
         updateAttachments();
         setFormStatus('Thank you. Your message has been sent.', true);
       } catch (error) {
