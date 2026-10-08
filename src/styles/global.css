@@ -42,3 +42,9 @@ footer a { text-underline-offset:.22em; }
 .retailer-disclaimer { max-width:30rem; margin:0; color:var(--muted); font-size:.82rem; line-height:1.55; }
 @media (max-width:800px) { .whatsapp-contact { right:1rem; bottom:5.5rem; } }
 @media (max-width:800px) { .retailer-installation { grid-template-columns:1fr; gap:1.5rem; } }
+
+.enquiry-form input[type="file"] { min-width:0; font-size:.85rem; }
+.enquiry-form input[type="file"]::file-selector-button { padding:.5rem .75rem; margin-right:.6rem; border:1px solid var(--line); background:var(--paper); color:var(--ink); cursor:pointer; }
+#attachment-status { overflow-wrap:anywhere; margin:.6rem 0; }
+.enquiry-form .clear-attachments { width:auto; padding:.4rem .75rem; font-size:.8rem; }
+.enquiry-form .clear-attachments[hidden] { display:none; }

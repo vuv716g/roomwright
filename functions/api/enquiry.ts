@@ -1,3 +1,5 @@
+import { attachmentError, MAX_TOTAL_ATTACHMENT_BYTES } from '../../src/lib/attachments';
+
 interface Env {
   RESEND_API_KEY: string;
   ENQUIRY_TO: string;
@@ -6,7 +8,7 @@ interface Env {
   TURNSTILE_HOSTNAMES: string;
 }
 
-const MAX_FORM_BYTES = 20_000;
+const MAX_FORM_BYTES = MAX_TOTAL_ATTACHMENT_BYTES + 64_000;
 const MAX_TOKEN_LENGTH = 2_048;
 const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 const TEST_SECRET = '1x0000000000000000000000000000000AA';
@@ -51,11 +53,38 @@ async function verifyTurnstile(request: Request, env: Env, token: string): Promi
 export const onRequestPost = async ({ request, env }: { request: Request; env: Env }): Promise<Response> => {
   const origin = request.headers.get('Origin');
   if (origin && origin !== new URL(request.url).origin) return json({ error: 'Invalid request origin.' }, 403);
-  if (Number(request.headers.get('Content-Length') ?? 0) > MAX_FORM_BYTES) return json({ error: 'Your message is too long.' }, 413);
+  if (Number(request.headers.get('Content-Length') ?? 0) > MAX_FORM_BYTES) return json({ error: 'Your message and attachments are too large. Attachments must total 10 MB or less.' }, 413);
 
   let form: FormData;
-  try { form = await request.formData(); } catch { return json({ error: 'We could not read that message.' }, 400); }
+  try {
+    // Bound the upload even when Content-Length is absent or incorrect.
+    const reader = request.body?.getReader();
+    if (!reader) return json({ error: 'We could not read that message.' }, 400);
+    const chunks: ArrayBuffer[] = [];
+    let size = 0;
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.byteLength;
+      if (size > MAX_FORM_BYTES) {
+        await reader.cancel();
+        return json({ error: 'Your message and attachments are too large. Attachments must total 10 MB or less.' }, 413);
+      }
+      chunks.push(new Uint8Array(value).buffer);
+    }
+    form = await new Response(new Blob(chunks), { headers: { 'Content-Type': request.headers.get('Content-Type') || '' } }).formData();
+  } catch { return json({ error: 'We could not read that message.' }, 400); }
   if (formText(form.get('website'), 100)) return json({ ok: true });
+
+  const files: File[] = [];
+  for (const [field, value] of form.entries()) {
+    if (typeof value === 'string') continue;
+    if (field !== 'attachments') return json({ error: 'Unexpected attachment field.' }, 400);
+    if (value.name === '' && value.size === 0) continue;
+    files.push(value);
+  }
+  const fileError = attachmentError(files);
+  if (fileError) return json({ error: fileError }, 400);
 
   const token = formText(form.get('cf-turnstile-response'), MAX_TOKEN_LENGTH + 1);
   if (!await verifyTurnstile(request, env, token)) return json({ error: 'Please complete the verification check and try again.' }, 403);
@@ -77,10 +106,25 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: E
   if (!configured(apiKey) || !configured(to) || !configured(from)) return json({ error: 'The message form is not configured.' }, 503);
 
   try {
+    const attachments = [];
+    for (const file of files) {
+      const bytes = new Uint8Array(await file.arrayBuffer());
+      const extension = file.name.split('.').pop()!.toLowerCase();
+      const starts = (...signature: number[]) => signature.every((byte, index) => bytes[index] === byte);
+      const valid = extension === 'pdf' ? starts(37, 80, 68, 70, 45)
+        : extension === 'png' ? starts(137, 80, 78, 71, 13, 10, 26, 10)
+        : extension === 'webp' ? starts(82, 73, 70, 70) && bytes[8] === 87 && bytes[9] === 69 && bytes[10] === 66 && bytes[11] === 80
+        : starts(255, 216, 255);
+      if (!valid) return json({ error: 'An attachment does not match its file type. Please choose a valid JPG, PNG, WebP or PDF.' }, 400);
+      let binary = '';
+      for (let offset = 0; offset < bytes.length; offset += 8192) binary += String.fromCharCode(...bytes.subarray(offset, offset + 8192));
+      const filename = file.name.replace(/^.*[\\/]/, '').replace(/[\u0000-\u001f\u007f]/g, '').slice(-180) || 'attachment.' + extension;
+      attachments.push({ filename, content: btoa(binary) });
+    }
     const sent = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + apiKey, 'Content-Type': 'application/json', 'Idempotency-Key': 'roomwright-enquiry-' + crypto.randomUUID() },
-      body: JSON.stringify({ from, to: [to], reply_to: email, subject: 'Website message: Roomwright', text, html })
+      body: JSON.stringify({ from, to: [to], reply_to: email, subject: 'Website message: Roomwright', text, html, ...(attachments.length ? { attachments } : {}) })
     });
     if (!sent.ok) return json({ error: 'We could not send your message right now. Please try again later.' }, 502);
   } catch {
