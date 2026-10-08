@@ -1,0 +1,29 @@
+---
+import { featuredService as feature } from '../config/featured-service';
+---
+{feature.enabled && <section class="featured-service" aria-labelledby="featured-service-heading">
+  <figure>
+    <img src={feature.image} alt={feature.imageAlt} width="1208" height="896" loading="lazy" />
+    <figcaption>{feature.caption}</figcaption>
+  </figure>
+  <div class="featured-service-copy">
+    <p class="section-label">{feature.label}</p>
+    <h2 id="featured-service-heading">{feature.title}</h2>
+    <p class="featured-service-description">{feature.description}</p>
+    <a class="button" href="#contact" data-enquiry-service={feature.enquiry}>{feature.action} <span aria-hidden="true">&rarr;</span></a>
+    <p class="featured-service-hint">{feature.hint}</p>
+  </div>
+</section>}
+<style>
+  .featured-service { margin:0 clamp(1.25rem,8vw,9rem) clamp(2rem,4vw,4rem); display:grid; grid-template-columns:1fr 1.1fr; background:var(--sand); border:1px solid var(--line); }
+  figure { position:relative; margin:0; min-width:0; }
+  img { height:100%; min-height:27rem; object-fit:cover; }
+  figcaption { position:absolute; bottom:1rem; left:1rem; right:1rem; width:fit-content; padding:.35rem .6rem; background:var(--paper); color:var(--ink); font-size:.72rem; }
+  .featured-service-copy { align-self:center; padding:clamp(1.5rem,4vw,4.5rem); }
+  h2 { font-size:clamp(2.2rem,3.6vw,4rem); line-height:1.06; margin:0 0 1.25rem; }
+  .featured-service-description { max-width:32rem; margin:0 0 1.6rem; }
+  .button { display:inline-flex; align-items:center; gap:1rem; background:var(--ink); color:var(--paper); white-space:normal; }
+  .button:hover { background:var(--clay); }
+  .featured-service-hint { max-width:29rem; color:var(--muted); font-size:.83rem; margin:1rem 0 0; }
+  @media (max-width:800px) { .featured-service { grid-template-columns:1fr; } img { height:auto; min-height:0; max-height:24rem; object-position:center; } }
+</style>

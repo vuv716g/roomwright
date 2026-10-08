@@ -41,6 +41,13 @@ test('enquiry attachments and rejection paths', async (t) => {
     assert.equal(sent.attachments[0].filename, 'room.png');
     assert.deepEqual(Buffer.from(sent.attachments[0].content, 'base64'), png);
   });
+  await t.test('selected service is included in the email', async () => {
+    const data = form();
+    data.set('service', 'Furniture assembly');
+    assert.equal((await submit(data)).status, 200);
+    assert.match(sent.text, /Service: Furniture assembly/);
+    assert.match(sent.html, /Furniture assembly/);
+  });
   await t.test('messages without attachments still send', async () => {
     assert.equal((await submit(form())).status, 200);
     assert.equal(sent.attachments, undefined);

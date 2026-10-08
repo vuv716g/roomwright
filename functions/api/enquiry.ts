@@ -93,10 +93,11 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: E
   const email = formText(form.get('email'), 254);
   const telephone = formText(form.get('telephone'), 60);
   const postcode = formText(form.get('postcode'), 24);
+  const service = formText(form.get('service'), 120);
   const message = formText(form.get('message'), 6_000);
   if (!name || !message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json({ error: 'Please provide your name, a valid email address and a message.' }, 400);
 
-  const fields = [['Name', name], ['Email', email], ['Telephone', telephone], ['Postcode', postcode]].filter(([, value]) => value);
+  const fields = [['Name', name], ['Email', email], ['Telephone', telephone], ['Postcode', postcode], ['Service', service]].filter(([, value]) => value);
   const text = fields.map(([label, value]) => label + ': ' + value).join('\n') + '\n\nMessage:\n' + message;
   const html = '<h2>New Roomwright message</h2><p>' + fields.map(([label, value]) => '<strong>' + escapeHtml(label) + ':</strong> ' + escapeHtml(value)).join('<br>') + '</p><h3>Message</h3><p>' + escapeHtml(message).replace(/\n/g, '<br>') + '</p>';
 

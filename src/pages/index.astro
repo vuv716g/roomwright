@@ -2,6 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import FeaturedService from '../components/FeaturedService.astro';
+import { featuredService } from '../config/featured-service';
 
 import { site } from '../config/site';
 import { services } from '../data/services';
@@ -33,6 +35,8 @@ const schema = { '@context': 'https://schema.org', '@type': 'ProfessionalService
         <div class="intro-copy"><p>A successful room involves far more than fitting the visible pieces. Plumbing, electrics, walls, floors, lighting, storage and finishing all have to work together.</p><p>Harrison manages the complete transformation, helping turn an idea into a practical, carefully finished room, fitted-storage solution or outdoor space.</p></div>
       </section>
 
+      <FeaturedService />
+
 <section id="projects" class="projects section" aria-labelledby="projects-heading">
         <div class="section-heading"><div><p class="section-label">Selected work</p><h2 id="projects-heading">Rooms, storage<br />& spaces.</h2></div><p>Recent work across interiors, fitted furniture and outdoor living spaces &mdash; designed and made as complete, practical projects.</p></div>
         <div class="featured-project-grid">{projects.filter((project) => ["fitted-wardrobe-storage", "bespoke-outbuilding-bar", "outbuilding-deck-lighting"].includes(project.slug)).map((project) => <article class="project-card featured-project"><button class="project-image" type="button" data-lightbox-src={project.images[0]} data-lightbox-alt={project.title} aria-label={`View ${project.title} larger`}><img src={project.images[0]} alt={project.title} width="1200" height="900" loading="lazy" /></button>{project.images.length > 1 && <div class="project-thumbnails" aria-label={`${project.title} gallery`}>{project.images.slice(1).map((image, index) => <button type="button" data-lightbox-src={image} data-lightbox-alt={project.title} aria-label="View installation stage"><img src={image} alt={`${project.title} installation stage ${index + 1}`} width="900" height="675" loading="lazy" /></button>)}</div>}<div><p class="project-kicker">Recent project</p><h3>{project.title}</h3>{project.description && <p>{project.description}</p>}</div></article>)}</div>
@@ -43,13 +47,7 @@ const schema = { '@context': 'https://schema.org', '@type': 'ProfessionalService
       <section id="services" class="services section" aria-labelledby="services-heading">
         <div class="section-heading"><div><p class="section-label">What Roomwright does</p><h2 id="services-heading">Everything the room needs.</h2></div><p>Each part is considered as part of one complete job, not as a list of separate trades.</p></div>
         <div class="service-grid">{services.map(([title, description], index) => <article class="service-card"><span>{String(index + 1).padStart(2, '0')}</span><h3>{title}</h3><p>{description}</p></article>)}</div>
-        <aside class="retailer-installation" aria-labelledby="retailer-installation-heading">
-          <div>
-            <p class="section-label">Bought it elsewhere?</p>
-            <h3 id="retailer-installation-heading">Installation available for furniture purchased from Amazon and other major retailers.</h3>
-          </div>
-          <p class="retailer-disclaimer">Roomwright is an independent installation service and is not affiliated with or endorsed by Amazon.</p>
-        </aside>
+
       </section>
 
       <section class="process section tone" aria-labelledby="process-heading">
@@ -68,7 +66,7 @@ const schema = { '@context': 'https://schema.org', '@type': 'ProfessionalService
 
 
 
-      <section id="contact" class="contact section tone" aria-labelledby="contact-heading"><div><p class="section-label">Start a conversation</p><h2 id="contact-heading">Thinking about<br />a new room?</h2><p>Whether you already know exactly what you want or are starting with a room that simply isn't working, send a message and tell Harrison what you have in mind.</p></div><form class="enquiry-form" action="/api/enquiry" method="post" enctype="multipart/form-data" data-enquiry-form><div class="honeypot" aria-hidden="true"><label>Leave this empty <input name="website" tabindex="-1" autocomplete="off" /></label></div><label>Name<input name="name" autocomplete="name" required /></label><label>Email<input name="email" type="email" autocomplete="email" required /></label><label>Telephone <small>optional</small><input name="telephone" type="tel" autocomplete="tel" /></label><label>Postcode <small>optional</small><input name="postcode" autocomplete="postal-code" /></label><label>Tell Harrison about your room<textarea name="message" rows="5" required placeholder="A little about the room, what you would like to change, and anything else that may help."></textarea></label><label for="attachments">Attach photos or plans <small>optional</small></label><p id="attachment-help">{ATTACHMENT_HELP}</p><input id="attachments" name="attachments" type="file" accept={ATTACHMENT_ACCEPT} multiple aria-describedby="attachment-help attachment-status" /><p id="attachment-status" aria-live="polite"></p><ul id="attachment-list" aria-label="Selected attachments"></ul><button type="button" class="clear-attachments" hidden>Clear attachments</button><div class="verification-field" data-turnstile-widget></div><button type="submit">Send message <span aria-hidden="true">&rarr;</span></button><div class="form-status" aria-live="polite"></div></form></section>    </main>
+      <section id="contact" class="contact section tone" aria-labelledby="contact-heading"><div><p class="section-label">Start a conversation</p><h2 id="contact-heading">Thinking about<br />a new room?</h2><p>Whether you already know exactly what you want or are starting with a room that simply isn't working, send a message and tell Harrison what you have in mind.</p></div><form class="enquiry-form" action="/api/enquiry" method="post" enctype="multipart/form-data" data-enquiry-form><div class="honeypot" aria-hidden="true"><label>Leave this empty <input name="website" tabindex="-1" autocomplete="off" /></label></div><label>Name<input name="name" autocomplete="name" required /></label><label>Email<input name="email" type="email" autocomplete="email" required /></label><label>Telephone <small>optional</small><input name="telephone" type="tel" autocomplete="tel" /></label><label>Postcode <small>optional</small><input name="postcode" autocomplete="postal-code" /></label><label>What can we help with? <small>optional</small><select name="service"><option value="">Please choose</option><option value={featuredService.enquiry}>{featuredService.enquiry}</option><option value="Room design and installation">Room design and installation</option><option value="Something else">Something else</option></select></label><label>Tell Harrison about your room<textarea name="message" rows="5" required placeholder="A little about the room, what you would like to change, and anything else that may help."></textarea></label><label for="attachments">Attach photos or plans <small>optional</small></label><p id="attachment-help">{ATTACHMENT_HELP}</p><input id="attachments" name="attachments" type="file" accept={ATTACHMENT_ACCEPT} multiple aria-describedby="attachment-help attachment-status" /><p id="attachment-status" aria-live="polite"></p><ul id="attachment-list" aria-label="Selected attachments"></ul><button type="button" class="clear-attachments" hidden>Clear attachments</button><div class="verification-field" data-turnstile-widget></div><button type="submit">Send message <span aria-hidden="true">&rarr;</span></button><div class="form-status" aria-live="polite"></div></form></section>    </main>
     <Footer />
   </div>
   <a class="mobile-email" href="#contact">Send a message</a>
@@ -87,6 +85,12 @@ const schema = { '@context': 'https://schema.org', '@type': 'ProfessionalService
     dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
 
     const enquiryForm = document.querySelector<HTMLFormElement>('[data-enquiry-form]');
+    document.querySelectorAll<HTMLAnchorElement>('[data-enquiry-service]').forEach((link) => {
+      link.addEventListener('click', () => {
+        const select = enquiryForm?.querySelector<HTMLSelectElement>('[name="service"]');
+        if (select) select.value = link.dataset.enquiryService || '';
+      });
+    });
     const formStatus = enquiryForm?.querySelector<HTMLElement>('.form-status');
     const submitButton = enquiryForm?.querySelector<HTMLButtonElement>('button[type="submit"]');
     const turnstileWidget = enquiryForm?.querySelector<HTMLElement>('[data-turnstile-widget]');
